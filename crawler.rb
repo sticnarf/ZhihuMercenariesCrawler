@@ -21,7 +21,7 @@ class UserTask
     follower = all(".zm-profile-side-following strong").last.text.to_i
     answer = all(".profile-navbar .num")[1].text.to_i
     # the argument in the formula below can be modified
-    value = follower / (vote**1.4 + answer**2 + 1)
+    value = follower / (vote**1.5 + 1)
     judgment = true if value > 1
     User.create(name: name, vote: vote, follower: follower, answer: answer,
                 value: value, judgment: judgment, visited: true, identifier: identifier)
