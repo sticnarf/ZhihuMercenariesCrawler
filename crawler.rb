@@ -84,9 +84,10 @@ class AnswerTask
   end
 end
 
+tasks = ([UserTask] * 99 + [AnswerTask])
 
 loop do
-  ([UserTask] * 9 + [AnswerTask]).sample.where(:finished => false).limit(10).each do |task|
+  tasks.sample.where(:finished => false).limit(10).each do |task|
     task.work
   end
 end
