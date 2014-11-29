@@ -1,3 +1,4 @@
+# set id of seed answer here
 seed_answer = 33495789
 
 if File.exist?('data.db')
@@ -7,26 +8,26 @@ if File.exist?('data.db')
   File.delete('data.db')
 end
 
-require './db.rb'
+require_relative 'db'
 
 DB.create_table :users do
   primary_key :id
-  String :identifier, index: true
-  Fixnum :praise
+  String :identifier, index: true, unique: true
+  String :name
+  Fixnum :vote
   Fixnum :answer
   Fixnum :follower
-  Float :possibility
+  Float :value
   boolean :visited, default: false
   boolean :judgment
 end
 
 DB.create_table :answers do
   primary_key :id
-  Fixnum :identifier, index: true
-  Fixnum :praise
+  Fixnum :identifier, index: true, unique: true
+  Fixnum :vote
   Fixnum :pollution
   boolean :visited, default: false
-  boolean :judgment
 end
 
 DB.create_table :users_answers do
@@ -37,28 +38,16 @@ end
 
 DB.create_table :user_tasks do
   primary_key :id
-  String :identifier, index: true
+  String :identifier, index: true, unique: true
   boolean :finished, default: false
 end
 
 DB.create_table :answer_tasks do
   primary_key :id
-  Fixnum :identifier, index: true
+  Fixnum :identifier, index: true, unique: true
   boolean :finished, default: false
 end
 
-class User < Sequel::Model
-  many_to_many :answers
-end
+init
 
-class Answer < Sequel::Model
-  many_to_many :users
-end
-
-class UserTask < Sequel::Model
-end
-
-class AnswerTask < Sequel::Model
-end
-
-AnswerTask.create(:identifier => seed_answer)
+AnswerTask.create(identifier: seed_answer)
