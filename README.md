@@ -20,7 +20,7 @@ Edit the seed problem url in `init.rb` and run it to finish initialization.
 
 ## Usage
 
-Run `crawler.rb` to start the crawler.
+Run `run.sh` to start the crawler.
 
 ~~You can interrupt the program at any time. Next time you start the program, it will resume from break point.~~
 

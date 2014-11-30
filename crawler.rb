@@ -97,8 +97,7 @@ end
 
 tasks = ([UserTask] * 99 + [AnswerTask])
 
-loop do
-  Capybara.reset_sessions!
+10.times do
   tasks.sample.where(:finished => false).limit(10).each do |task|
     task.work
   end
